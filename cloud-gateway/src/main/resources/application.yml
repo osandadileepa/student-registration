@@ -1,0 +1,51 @@
+server:
+  port: 8585
+
+eureka:
+  client:
+    enabled: true
+    fetch-registry: true
+    service-url:
+      defaultzone: http://localhost:8761/eureka
+  instance:
+    hostname: localhost
+
+spring:
+  application:
+    name: api-gateway
+
+  cloud:
+    gateway:
+      routes:
+        - id: student-service
+          uri: lb://STUDENT-SERVICE
+          predicates:
+            - Path=/student/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: student-service
+                fallbackuri: forward:/studentFallBack
+        - id: class-service
+          uri: lb://CLASS-SERVICE
+          predicates:
+            - Path=/class/**
+#          filters:
+#            - name: CircuitBreaker
+#              args:
+#                name: class-service
+#                fallbackuri: forward:/classFallback
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream
+
+hystrix:
+  command:
+    fallbackcmd:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 5000

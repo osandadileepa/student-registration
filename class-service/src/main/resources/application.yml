@@ -1,0 +1,22 @@
+server:
+  port: 8082
+
+eureka:
+  client:
+    enabled: true
+    fetch-registry: true
+    service-url:
+      defaultzone: http://localhost:8761/eureka
+  instance:
+    hostname: localhost
+
+spring:
+  application:
+    name: CLASS-SERVICE
+
+  data:
+    mongodb:
+      host: localhost:27017
+      username: user
+      password: password
+      database: student

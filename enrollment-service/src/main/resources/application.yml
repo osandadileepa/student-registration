@@ -1,0 +1,23 @@
+server:
+  port: 8083
+
+eureka:
+  client:
+    enabled: true
+    fetch-registry: true
+    service-url:
+      defaultzone: http://localhost:8761/eureka
+  instance:
+    hostname: localhost
+
+spring:
+  application:
+    name: ENROLLMENT-SERVICE
+
+  data:
+    mongodb:
+      host: localhost:27017
+      username: user
+      password: password
+      database: student
+
