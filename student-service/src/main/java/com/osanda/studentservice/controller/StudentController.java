@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.inject.Inject;
 
-@RequestMapping(value = "/student/")
+@RequestMapping(value = "${spring.data.rest.base-path}/")
 @RestController
 public class StudentController {
 
