@@ -5,6 +5,8 @@ eureka:
   client:
     enabled: true
     fetch-registry: true
+    healthcheck:
+      enabled: true
     service-url:
       defaultzone: http://localhost:8761/eureka
   instance:
@@ -16,9 +18,16 @@ spring:
 
   data:
     mongodb:
-      host: localhost:27017
+      host: localhost
+      port: 27019
 #      username: user
 #      password: password
       database: student
     rest:
       base-path: /student
+ 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

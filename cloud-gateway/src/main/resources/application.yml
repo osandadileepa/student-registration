@@ -5,6 +5,8 @@ eureka:
   client:
     enabled: true
     fetch-registry: true
+    healthcheck:
+      enabled: true
     service-url:
       defaultzone: http://localhost:8761/eureka
   instance:
@@ -30,17 +32,27 @@ spring:
           uri: lb://CLASS-SERVICE
           predicates:
             - Path=/class/**
-#          filters:
-#            - name: CircuitBreaker
-#              args:
-#                name: class-service
-#                fallbackuri: forward:/classFallback
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: class-service
+                fallbackuri: forward:/classFallback
+        - id: enrollment-service
+          uri: lb://ENROLLMENT-SERVICE
+          predicates:
+            - Path=/enrollment/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: enrollment-service
+                fallbackuri: forward:/enrollmentFallback
 
 management:
   endpoints:
     web:
       exposure:
-        include: hystrix.stream
+        include:
+        - hystrix.stream
 
 hystrix:
   command:
