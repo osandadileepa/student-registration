@@ -1,10 +1,12 @@
 package com.osanda.classservice.entity;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Set;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.osanda.classservice.dto.SchoolClassDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -31,6 +33,14 @@ public class SchoolClass implements Serializable {
 
 	private String description;
 
-	private List<String> studentIdList;
+	private Set<String> studentIdList;
+
+	public SchoolClass(SchoolClassDto classDto) {
+		this.id = classDto.getId();
+		this.name = classDto.getName();
+		this.type = classDto.getType();
+		this.description = classDto.getDescription();
+
+	}
 
 }
