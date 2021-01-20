@@ -1,0 +1,9 @@
+rootProject.name = 'student-registration'
+include 'class-service'
+include 'student-service'
+include 'enrollment-service'
+include 'cloud-gateway'
+include 'hystrix-dashboard'
+include 'service-registry'
+include 'common-service'
+

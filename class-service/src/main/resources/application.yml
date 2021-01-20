@@ -23,3 +23,15 @@ spring:
       database: class_details
     rest:
       base-path: /class
+ 
+  boot:
+    admin:
+      client:
+        url:
+        - http://localhost:9090
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+        - "*"
