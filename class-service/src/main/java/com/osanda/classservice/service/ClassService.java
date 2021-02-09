@@ -3,6 +3,7 @@ package com.osanda.classservice.service;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -43,7 +44,20 @@ public class ClassService {
 
 	public SchoolClass getClassById(String id) {
 
-		return this.classRepository.findById(id).get();
+		return this.classRepository.findById(id).orElse(new SchoolClass());
+	}
+	
+	
+	public SchoolClass updateDetails(String id, SchoolClassDto dto) {
+
+		SchoolClass update = this.classRepository.findById(id).orElse(new SchoolClass());
+		
+		update.setName(dto.getName());
+		update.setDescription(dto.getDescription());
+		update.setType(dto.getType());
+		update.setStudentIdList(dto.getStudentList().stream().map(st-> st.getId()).collect(Collectors.toSet()));
+		
+		return this.classRepository.save(update);
 	}
 
 	public void deleteClassById(String id) {
@@ -131,5 +145,4 @@ public class ClassService {
 
 		return status;
 	}// getClassesWithStudents()
-
-}// ClassService {}
+}

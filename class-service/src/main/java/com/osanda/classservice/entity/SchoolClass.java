@@ -43,4 +43,12 @@ public class SchoolClass implements Serializable {
 
 	}
 
+	public SchoolClass(String id, String name, String type, String description) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.type = type;
+		this.description = description;
+	}
+
 }
